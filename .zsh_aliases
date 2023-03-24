@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+
+alias jn="jupyter notebook"
+alias jl="jupyter lab"
+
+alias ws="~/Desktop/scripts/workspace.sh"
+alias ff="~/Desktop/scripts/workspace1.sh"
+alias dv="cd ~/Desktop/scripts/ && ./workspace2.sh"
+
+alias cat="bat"
+
+alias ls="lsd" 
+alias l.="ls -d .*"
+alias l='ls -l'
+alias ll="ls -alF"
+alias la="ls -A"
+alias lh="ls -lAF"
+alias lt="lsd -AF --tree"
+alias ld="ls -d */"
+
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+
+alias vi="vi"
+alias vim="nvim"
+
+alias nvimrc="cd ~/.config/nvim/ && vim"
+alias zshrc="vim ~/.zshrc"
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'

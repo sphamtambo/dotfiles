@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/sphalo/.config/nvim/lua/sphalo/plugins'
+let g:netrw_dirhist_4='/home/sphalo/.vim'
+let g:netrw_dirhist_3='/home/sphalo/data_science/deep_learning/transformers/sequence_classification/data'
+let g:netrw_dirhist_2='/home'
+let g:netrw_dirhist_1='/'
