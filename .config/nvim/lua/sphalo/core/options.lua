@@ -22,9 +22,9 @@ opt.number = true
 -- scroll
 opt.scrolloff = 8
 opt.signcolumn = "yes"
-opt.isfname:append("@-@")
+opt.isfname:append "@-@"
 
--- Faster scrolling
+-- dont redraw while executing macros
 opt.lazyredraw = true
 
 -- tabs and indentation
@@ -63,7 +63,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 -- delete word
-opt.iskeyword:append("-")
+opt.iskeyword:append "-"
 
 -- fat cursor
 opt.guicursor = ""

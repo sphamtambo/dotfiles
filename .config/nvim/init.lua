@@ -1,17 +1,18 @@
-require("sphalo.plugins-setup")
-require("sphalo.core.options")
-require("sphalo.core.keymap")
-require("sphalo.core.colorscheme")
-require("sphalo.plugins.comment")
-require("sphalo.plugins.nvim-tree")
-require("sphalo.plugins.lualine")
-require("sphalo.plugins.telescope")
-require("sphalo.plugins.nvim-cmp")
-require("sphalo.plugins.lsp.mason")
-require("sphalo.plugins.lsp.lspsaga")
-require("sphalo.plugins.lsp.lspconfig")
-require("sphalo.plugins.lsp.null-ls")
-require("sphalo.plugins.autopairs")
-require("sphalo.plugins.treesitter")
-require("sphalo.plugins.toggleterm")
--- require("sphalo.plugins.gitsigns")
+require "sphalo.plugins-setup"
+require "sphalo.core.options"
+require "sphalo.core.keymap"
+require "sphalo.core.colorscheme"
+require "sphalo.plugins.comment"
+require "sphalo.plugins.nvim-tree"
+require "sphalo.plugins.lualine"
+require "sphalo.plugins.telescope"
+require "sphalo.plugins.nvim-cmp"
+require "sphalo.plugins.toggleterm"
+require "sphalo.plugins.lsp.mason"
+require "sphalo.plugins.lsp.lspsaga"
+require "sphalo.plugins.lsp.lspconfig"
+require "sphalo.plugins.lsp.null-ls"
+require "sphalo.plugins.autopairs"
+require "sphalo.plugins.treesitter"
+require "sphalo.plugins.neoai"
+require "sphalo.plugins.indent-blankline"

@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
   ["darkplus.nvim"] = {
     loaded = true,
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
@@ -113,6 +118,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lspkind.nvim"] = {
     loaded = true,
@@ -129,6 +144,21 @@ _G.packer_plugins = {
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["markdown-it"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/markdown-it",
+    url = "https://github.com/markdown-it/markdown-it"
+  },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
+  marked = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/marked",
+    url = "https://github.com/markedjs/marked"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -144,11 +174,27 @@ _G.packer_plugins = {
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["neoai.nvim"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/neoai.nvim",
+    url = "https://github.com/Bryley/neoai.nvim"
+  },
   neogen = {
     config = { "\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vneogen\frequire\0" },
     loaded = true,
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/neogen",
     url = "https://github.com/danymat/neogen"
+  },
+  neorg = {
+    config = { "\27LJ\2\n≈\4\0\0\a\0\25\0'6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\23\0005\3\3\0004\4\0\0=\4\4\0034\4\0\0=\4\5\0034\4\0\0=\4\6\0034\4\0\0=\4\a\0034\4\0\0=\4\b\0034\4\0\0=\4\t\0034\4\0\0=\4\n\0034\4\0\0=\4\v\0034\4\0\0=\4\f\0035\4\14\0005\5\r\0=\5\15\4=\4\16\0034\4\0\0=\4\17\0035\4\21\0005\5\19\0005\6\18\0=\6\20\5=\5\15\4=\4\22\3=\3\24\2B\0\2\1K\0\1\0\tload\1\0\0\16core.dirman\1\0\0\15workspaces\1\0\1\22default_workspace\rprojects\1\0\4\vschool\25~/repos/neorg/school\twork\23~/repos/neorg/work\rprojects\27~/repos/neorg/projects\rpersonal\27~/repos/neorg/personal\19core.concealer\18core.keybinds\vconfig\1\0\0\1\0\2\21default_keybinds\2\17neorg_leader\6 \24core.qol.todo_items\17core.qol.toc\17core.journal\17core.summary\14core.mode\18core.neorgcmd!core.integrations.treesitter\15core.itero\18core.defaults\1\0\0\nsetup\nneorg\frequire\0" },
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/neorg",
+    url = "https://github.com/nvim-neorg/neorg"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -169,12 +215,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-surround"] = {
-    config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0" },
-    loaded = true,
-    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/nvim-surround",
-    url = "https://github.com/kylechui/nvim-surround"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -228,6 +268,11 @@ _G.packer_plugins = {
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
   },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
+  },
   ["vim-tmux-navigator"] = {
     loaded = true,
     path = "/home/sphalo/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
@@ -236,10 +281,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-surround
-time([[Config for nvim-surround]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
-time([[Config for nvim-surround]], false)
+-- Config for: neorg
+time([[Config for neorg]], true)
+try_loadstring("\27LJ\2\n≈\4\0\0\a\0\25\0'6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\23\0005\3\3\0004\4\0\0=\4\4\0034\4\0\0=\4\5\0034\4\0\0=\4\6\0034\4\0\0=\4\a\0034\4\0\0=\4\b\0034\4\0\0=\4\t\0034\4\0\0=\4\n\0034\4\0\0=\4\v\0034\4\0\0=\4\f\0035\4\14\0005\5\r\0=\5\15\4=\4\16\0034\4\0\0=\4\17\0035\4\21\0005\5\19\0005\6\18\0=\6\20\5=\5\15\4=\4\22\3=\3\24\2B\0\2\1K\0\1\0\tload\1\0\0\16core.dirman\1\0\0\15workspaces\1\0\1\22default_workspace\rprojects\1\0\4\vschool\25~/repos/neorg/school\twork\23~/repos/neorg/work\rprojects\27~/repos/neorg/projects\rpersonal\27~/repos/neorg/personal\19core.concealer\18core.keybinds\vconfig\1\0\0\1\0\2\21default_keybinds\2\17neorg_leader\6 \24core.qol.todo_items\17core.qol.toc\17core.journal\17core.summary\14core.mode\18core.neorgcmd!core.integrations.treesitter\15core.itero\18core.defaults\1\0\0\nsetup\nneorg\frequire\0", "config", "neorg")
+time([[Config for neorg]], false)
 -- Config for: neogen
 time([[Config for neogen]], true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vneogen\frequire\0", "config", "neogen")
