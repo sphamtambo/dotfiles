@@ -1,0 +1,9 @@
+configuration {
+ modi: "window,drun,ssh,combi";
+ font: "hack 10";
+ /* show-icons: true; */
+ combi-modi: "window,drun,ssh";
+ }
+//@theme "Pop-Dark"
+
+@theme "/usr/share/rofi/themes/dmenu.rasi"
