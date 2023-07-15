@@ -39,7 +39,7 @@ end
 local signs = {
   Error = " ",
   Warn = " ",
-  Hint = "ﴞ ",
+  Hint = "",
   Info = " ",
 }
 
