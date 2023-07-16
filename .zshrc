@@ -1,24 +1,51 @@
 # Enable colors and change prompt:
 autoload -U colors && colors
 
+###################################################
+#		custom prompt sesstings
+###################################################
+
 # git prompt to contain git branch if applicable
-autoload -Uz vcs_info  
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-zstyle ':vcs_info:git*' formats "%{$fg[cyan]%}%s %{$reset_color%} %{$fg[blue]%}%b%{$reset_color%} %{$fg[red]%}(%a) %m%u%c%{$reset_color%} "
-zstyle ':vcs_info:*' enable git
-setopt prompt_subst
+# autoload -Uz vcs_info  
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# zstyle ':vcs_info:git*' formats "%{$fg[cyan]%}%s %{$reset_color%}%{$fg[blue]%}%b%{$reset_color%} %{$fg[red]%} %m%u%c%{$reset_color%} "
+# # zstyle ':vcs_info:git*' formats "%{$fg[cyan]%}%s %{$reset_color%}%{$fg[blue]%}%b%{$reset_color%} %{$fg[red]%}(%a) %m%u%c%{$reset_color%} "
+# zstyle ':vcs_info:*' enable git
+# setopt prompt_subst
+#
+# # prompt setup
+# PROMPT='%B%{$fg[red]%}['; # opening bracket 
+# PROMPT+='%{$fg[green]%}%n%  '; # username
+# PROMPT+='%{$fg[cyan]%}@ '; # @
+# PROMPT+='%{$fg[yellow]%}%1~'; # 1 for working directory 
+# PROMPT+='%{$fg[red]%}]'; # closing bracket
+# PROMPT+='%{$reset_color%} '; # reset colors
+# PROMPT+='%B%{$fg[white]%}$%b '; # pound sign color
+#
+# RPROMPT='${vcs_info_msg_0_} '; # git repository details
 
-# prompt setup
-PROMPT='%B%{$fg[red]%}['; # opening bracket 
-PROMPT+='%{$fg[green]%}%n%  '; # username
-PROMPT+='%{$fg[cyan]%}@ '; # @
-PROMPT+='%{$fg[yellow]%}%1~'; # 1 for working directory 
-PROMPT+='%{$fg[red]%}]'; # closing bracket
-PROMPT+='%{$reset_color%} '; # reset colors
-PROMPT+='%B%{$fg[white]%}$%b '; # pound sign color
+###################################################
+#			spaceship prompt sesstings
+###################################################
 
-RPROMPT='${vcs_info_msg_0_} '; # git repository details
+# Display time
+# SPACESHIP_TIME_SHOW=true
+
+# Display username always
+# SPACESHIP_USER_SHOW=always
+
+# Do not truncate path in repos
+SPACESHIP_DIR_TRUNC_REPO=false
+
+# Package info
+SPACESHIP_PACKAGE_PREFIX="via·"
+SPACESHIP_PACKAGE_SUFFIX=" "
+SPACESHIP_PACKAGE_COLOR="green"
+
+###################################################
+#		keybindings	
+###################################################
 
 # Use emacs keybindings  
 # bindkey -e
@@ -30,6 +57,8 @@ bindkey "^F" vi-cmd-mode
 # handy keybindings
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
+bindkey "^B" backward-word
+bindkey "^D" delete-word
 bindkey "^K" kill-line
 bindkey "^R" history-incremental-search-backward
 bindkey "^P" history-search-backward
@@ -73,6 +102,10 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Load aliases if they exist.
 source ~/.zsh_aliases
 
+# make nvim default editor
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/sphalo/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -82,15 +115,19 @@ else
     if [ -f "/home/sphalo/anaconda3/etc/profile.d/conda.sh" ]; then
         . "/home/sphalo/anaconda3/etc/profile.d/conda.sh"
     else
+        export PATH="/home/sphalo/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 PATH=~/home/sphalo/anaconda3:$PATH
-export PATH="/home/sphalo/anaconda3/bin:$PATH"
+PATH=/home/sphalo/anaconda3/bin/jupyter:$PATH
+# export PATH="/home/sphalo/anaconda3/bin:$PATH"  # commented out by conda initialize
 export PATH="$HOME/.local/bin":$PATH
 
 # Load / source zsh plugins.
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/spaceship/spaceship.zsh
+source ~/.zsh/z/z.sh
