@@ -1,0 +1,315 @@
+[colors]
+base = #1e1e2e
+mantle = #181825
+crust = #232634
+
+text = #E6B194
+subtext0 = #a6adc8
+subtext1 = #bac2de
+
+surface0 = #313244
+surface1 = #45475a
+surface2 = #585b70
+
+overlay0 = #6c7086
+overlay1 = #7f849c
+overlay2 = #9399b2
+
+
+blue = #89b4fa
+lavender = #b4befe
+sapphire = #74c7ec
+sky = #89dceb
+teal = #94e2d5
+green = #a6e3a1
+yellow = #f9e2af
+peach = #fab387
+maroon = #eba0ac
+red = #f38ba8
+mauve = #cba6f7
+pink = #E6B194 
+flamingo = #f2cdcd
+rosewater = #f5e0dc
+macchiato = #24273A
+
+transparent = #FF00000
+
+[bar/example]
+monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 27
+; offset-y = 0
+top = true
+fixed-center = true
+radius = 0.0
+
+background = ${colors.crust}
+foreground = ${colors.text}
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-right = filesystem memory wlan xbacklight pulseaudio battery date 
+tray-position = right
+tray-padding = 1
+
+modules-center =  i3
+modules-left = xwindow
+wm-restack= i3
+
+border-size = 1
+border-color = #00000000
+
+padding-left = 1
+padding-right = 1
+
+font-0 = "JetBrainsMono Nerd Font:size=10;1"
+font-1 = "JetBrainsMono Nerd Font:size=10;1"
+font-2 = fixed:pixelsize=10;1
+font-3 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;1"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
+font-6 = "Font Awesome 5 Free:pixelsize=10;1"
+
+[settings]
+screenchange-reload = true
+format-padding = 1
+
+[module/xwindow]
+format-foreground = ${colors.cyan}
+format-padding = 2
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/nowplaying]
+type = custom/script
+tail = true
+interval = 1
+format =  <label>
+exec = playerctl metadata --format "{{ artist }} - {{ title }}"
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+low-at = 30
+
+format-full = 󰁹 <label-full>
+label-full = %percentage%%
+label-full-padding = 0
+format-full-prefix-foreground = ${colors.pink}
+
+format-charging = <animation-charging> <label-charging>
+label-charging = %percentage%%
+label-charging-padding = 0
+format-charging-prefix-foreground = ${colors.pink}
+animation-charging-0 = 󰂄
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-prefix-foreground = ${colors.sky}
+label-discharging = %percentage%%
+label-discharging-padding = 0
+
+ramp-capacity-0 = 󰁻
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-1 = 󰁼
+ramp-capacity-1-foreground = ${colors.sky}
+ramp-capacity-2 = 󰁽
+ramp-capacity-2-foreground = ${colors.sky}
+ramp-capacity-3 = 󰁿
+ramp-capacity-3-foreground = ${colors.sky}
+ramp-capacity-4 = 󰂀
+ramp-capacity-4-foreground = ${colors.sky}
+ramp-capacity-5 = 󰂂
+ramp-capacity-5-foreground = ${colors.sky}
+
+format-low = <ramp-capacity><label-low>
+label-low-padding = 0
+label-low-foreground = ${colors.red}
+poll-interval = 5
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+;wrapping-scroll = true 
+;pin-workspaces = true
+fuzzy-match = true
+show-urgent = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.text}
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${colors.overlay0}
+label-focused-underline= ${colors.overlay1}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.red}
+label-visible-underline = ${self.red}
+label-visible-padding = ${self.red}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${colors.red}
+label-urgent-padding = 2
+
+# workspace
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+
+ws-num = 6 ; Number of workspaces to display
+show-all = true; Display all workspaces (even when there isn't a window open)
+
+; use a different color to distinguish empty workspaces from unactive workspaces:
+label-empty-foreground = ${colors.pink}
+label-empty = %icon%
+
+[module/date]
+type = internal/date
+interval = 1
+
+time = "%a, %b %d %H:%M"
+
+format = <label>
+format-padding = 1
+format-prefix = %{T5} %{T-}
+format-prefix-foreground = ${colors.pink}
+label = %{T1}%time%%{T-}
+label-padding = 1
+
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = false
+
+format-volume = <label-volume>
+format-volume-prefix = %{T4} %{T-}
+format-volume-prefix-foreground = ${colors.pink}
+label-volume = %{T1}%percentage%%%{T-}
+label-volume-padding = 1
+
+format-muted = <label-muted>
+format-muted-prefix = 󰸈
+format-muted-prefix-foreground = ${colors.overlay0}
+label-muted = %{T1}%percentage%%%{T-}
+label-muted-foreground = ${colors.overlay0}
+label-muted-padding = 1
+
+click-right = pavucontrol&
+
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 3.0
+
+format-connected = %{A1:networkmanager_dmenu:}  <label-connected>%{A}
+label-connected = %essid%
+
+
+[module/updates]
+type = custom/script
+exec = ~/.local/bin/polybar/updates-pacman-aurhelper
+interval = 600
+
+format = <label>
+format-prefix = 
+format-prefix-foreground = ${colors.maroon}
+label = %output%
+label-padding = 1
+
+[module/filesystem]
+type = internal/fs
+
+mount-0 = /
+interval = 30
+warn-percentage = 90
+
+format-mounted-prefix = 
+format-mounted-prefix-foreground = ${colors.pink}
+label-mounted = %percentage_used%%
+label-mounted-padding = 1
+
+format-warn-prefix = 
+format-warn = <label-warn>
+label-warn = %free%
+label-warn-padding = 1
+format-warn-foreground = ${colors.red}
+
+[module/xbacklight]
+type = internal/xbacklight
+
+interval = 1
+
+format = <label>
+format-prefix = %{T1}󰃞 %{T-}
+format-prefix-foreground = ${colors.pink}
+format-padding = 1
+format-background = ${color.blue}
+format-foreground = ${color.overlay1}
+format-overline = ${color.overlay1}
+format-underline = ${color.overlay1}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/memory]
+type = internal/memory
+interval = 1
+
+format-prefix = 󰍛
+format-prefix-foreground = ${colors.pink}
+format-padding = 1
+format-background = ${color.overlay1}
+format-foreground = ${color.overlay0}
+format-overline = ${color.overlay0}
+format-underline = ${color.overlay0}
+
+label = " %percentage_used%%"
+label-foreground = ${color.overlay0}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = 
+format-prefix-foreground = ${colors.yellow}
+format-padding = 1
+label = " %percentage%%"
+
+[module/powermenu]
+type = custom/menu
+content = 襤
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.pink}
+label-close =  cancel
+label-close-foreground = ${colors.pink}
+label-separator = |
+label-separator-foreground = ${colors.pink}
+
+menu-0-0 = reboot
+menu-0-0-exec = systemctl reboot
+menu-0-1 = power off
+menu-0-1-exec = systemctl poweroff
+
+
