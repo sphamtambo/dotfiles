@@ -11,16 +11,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup {
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+local plugins = {
   -- lua functions that many plugins
   "nvim-lua/plenary.nvim",
 
   -- colorschemes
-  -- -- ("bluz71/vim-nightfly-guicolors")
-  -- -- ("ellisonleao/gruvbox.nvim")
-  "lunarvim/darkplus.nvim",
-  "navarasu/onedark.nvim",
+  -- "ellisonleao/gruvbox.nvim",
+  -- "lunarvim/darkplus.nvim",
+  -- "navarasu/onedark.nvim",
+  -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  -- "EdenEast/nightfox.nvim",
+  "Mofiqul/dracula.nvim",
 
   -- comment gcc
   "numToStr/Comment.nvim",
@@ -55,18 +58,6 @@ require("lazy").setup {
   -- configuring lsp servers
   "neovim/nvim-lspconfig", -- easily configure language servers
   "hrsh7th/cmp-nvim-lsp", -- for autocompletion
-  {
-    "nvimdev/lspsaga.nvim",
-    branch = "main",
-    config = function()
-      require("lspsaga").setup {}
-    end,
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-      { "nvim-treesitter/nvim-treesitter" },
-      -- remember to TS Install markdown && markdown_inline
-    },
-  },
 
   --- enhanced lsp uis
   "onsails/lspkind.nvim", -- vs-code like icons for autocompletion
@@ -78,14 +69,16 @@ require("lazy").setup {
   -- treesitter configuration
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     -- requires = {
     -- { "ikatyang/tree-sitter-markdown" },
     { "markedjs/marked" }, -- markdown
     { "markdown-it/markdown-it" }, -- markdown parser
   },
+  -- TSIntall cpp, for c++ syntax highlighting
 
   -- auto closing
-  -- "windwp/nvim-autopairs", -- autoclose parens, brackets, quotes, etc...
+  "windwp/nvim-autopairs", -- autoclose parens, brackets, quotes, etc...
 
   -- autoclose tags
   { "windwp/nvim-ts-autotag", dependencies = { "nvim-treesitter" } },
@@ -114,7 +107,7 @@ require("lazy").setup {
   "MunifTanjim/nui.nvim", -- nui dependency
 
   -- github copilot
-  "github/copilot.vim",
+  -- "github/copilot.vim",
 
   -- vim indent guiides
   "lukas-reineke/indent-blankline.nvim",
@@ -164,12 +157,24 @@ require("lazy").setup {
 
   -- debugging
   {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = { "theHamsta/nvim-dap-virtual-text", "nvim-telescope/telescope-dap.nvim", "mfussenegger/nvim-dap" },
+    -- { "mfussenegger/nvim-dap-python" },
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    -- opts = {
+    --   handlers = {},
+    --   -- ensure_installed = { "debugpy", "codelldb" },
+    -- },
+  },
+
+  {
     "mfussenegger/nvim-dap",
-    dependencies = {
-      { "rcarriga/nvim-dap-ui" },
-      { "theHamsta/nvim-dap-virtual-text" },
-      { "nvim-telescope/telescope-dap.nvim" },
-      { "mfussenegger/nvim-dap-python" },
-    },
   },
 }
+local opts = {}
+require("lazy").setup(plugins, opts)

@@ -10,64 +10,27 @@ if not cmp_nvim_lsp_status then
   return
 end
 
-local keymap = vim.keymap -- for conciseness
-
--- enable keybinds only for when lsp server available
-local on_attach = function(_, bufnr)
-  -- keybind options
-  local opts = { noremap = true, silent = true, buffer = bufnr }
-
-  -- set keybinds
-  keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
-  keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
-  keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
-  keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
-  keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
-  keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
-  keymap.set("n", "<leader>rna", "<cmd>Lspsaga rename ++project<CR>", opts) -- smart rename all project
-  keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
-  keymap.set("n", "<leader>D", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
-  keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
-  keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
-  keymap.set("n", "K", function()
-    vim.lsp.buf.hover()
-  end, opts) -- show documentation for what is under cursor
-  keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
-end
-
--- Change the Diagnostic symbols in the sign column (gutter)
-local signs = {
-  Error = " ",
-  Warn = " ",
-  Hint = "",
-  Info = " ",
-}
-
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- configure python server
+local keymap = vim.keymap -- for conciseness
 
-require("lspconfig")["pyright"].setup {
+-- configure python server
+lspconfig["pyright"].setup {
   capabilities = capabilities,
-  on_attach = on_attach,
+  -- on_attach = on_attach,
 }
 
 -- configure bash server
 lspconfig["bashls"].setup {
   capabilities = capabilities,
-  on_attach = on_attach,
+  -- on_attach = on_attach,
 }
 
 -- configure lua server (with special settings)
 lspconfig["lua_ls"].setup {
   capabilities = capabilities,
-  on_attach = on_attach,
+  -- on_attach = on_attach,
   settings = { -- custom settings for lua
     Lua = {
       -- make the language server recognize "vim" global
@@ -84,3 +47,82 @@ lspconfig["lua_ls"].setup {
     },
   },
 }
+
+-- configure C++ server
+lspconfig["clangd"].setup {
+  -- on_attach = on_attach,
+  capabilities = {
+    offsetEncoding = "utf-32",
+    textDocument = {
+      semanticHighlightingCapabilities = {
+        semanticHighlighting = true,
+      },
+    },
+  },
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--pch-storage=memory",
+    "--clang-tidy",
+    "--suggest-missing-includes",
+    "--cross-file-rename",
+    "--completion-style=detailed",
+  },
+  init_options = {
+    clangdFileStatus = true,
+    usePlaceholders = true,
+    completeUnimported = true,
+    semanticHighlighting = true,
+  },
+}
+
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+keymap.set("n", "<space>d", vim.diagnostic.open_float)
+keymap.set("n", "[d", vim.diagnostic.goto_prev)
+keymap.set("n", "]d", vim.diagnostic.goto_next)
+keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+    keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+    keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+    keymap.set("n", "<space>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
+    keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+    keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+    keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    keymap.set("n", "<space>f", function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
+
+-- Change the Diagnostic symbols in the sign column (gutter)
+local signs = {
+  Error = " ",
+  Warn = " ",
+  Hint = "",
+  Info = " ",
+}
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end

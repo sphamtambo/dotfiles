@@ -20,9 +20,10 @@ end
 mason.setup()
 
 -- list of servers for mason to install
-require("mason-lspconfig").setup {
+mason_lspconfig.setup {
   ensure_installed = {
     "pyright",
+    "clangd",
     "lua_ls",
     "bashls",
   },
@@ -31,14 +32,17 @@ require("mason-lspconfig").setup {
 }
 
 -- list of formaters ans linters for mason null ls to install
-require("mason-null-ls").setup {
+mason_null_ls.setup {
   ensure_installed = {
+    "clang-format",
     "stylua",
     "black",
     "isort",
     "flake8",
     "mypy",
     "selene",
+    "bebugpy",
+    "codelldb",
   },
   -- auto-install configured formatters & linters (with null-ls)
   automatic_installation = true,

@@ -15,14 +15,16 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup {
   -- setup formatters & linters
   sources = {
-    --  to disable file types use
     formatting.black, -- python code formatter
     formatting.isort, -- python style linter for import statements
     formatting.stylua, -- lua conde formatter
     diagnostics.flake8, -- python linter, error, complexity analysis
-    -- diagnostics.mypy, --pyhton type checker
+    -- diagnostics.mypy, --python type checker
     diagnostics.selene, -- lua linter
-    -- null_ls.builtins.code_actions.gitsigns, -- gitsigns
+    formatting.clang_format, -- c/c++ formatter
+    --run the following command to select Google style and formant on save
+    --~/.local/share/nvim/mason/bin/clang-format --style Google --dump-config > .clang-format
+    null_ls.builtins.code_actions.gitsigns, -- gitsigns
   },
   -- configure format on save
   on_attach = function(current_client, bufnr)
